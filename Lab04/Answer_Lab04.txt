@@ -1,0 +1,59 @@
+Question: 
+Alternatively, to compare items in the cart, instead of using Comparator, we can use the Comparable interface and override the compareTo()method. You can refer to the Java docs to see the information of this interface.Suppose we are taking this Comparable interface approach.
+- What class should implement the Comparable interface?
+- In those classes, how should you implement the compareTo()method be to reflect the ordering that we want?
+- Can we have two ordering rules of the item (by title then cost and by cost then title) if we use this Comparable interface approach?
+- Suppose the DVDs has a different ordering rule from the other media types, that is by title, then decreasing length, then cost. How would you modify your code to allow this?
+--------------------------------------------------------------------------------------------------------------------------------
+Answer:
+1) Class Media nên imolement Comparable interface
+
+2) Ghi đè phương thức compareTo. Phương thức này so sánh các đối tượng dựa trên quy tắc sắp xếp theo yêu cầu
+Ví dụ:
+	public class Media implements Comparable<Media> {
+		@Override
+   		public int compareTo(Media other) {
+       		// So sánh theo tiêu đề trước
+        	int titleComparison = this.getTitle().compareTo(other.getTitle());
+       
+        	// Nếu tiêu đề giống nhau, so sánh theo giá
+        	if (titleComparison == 0) {
+            	return Float.compare(other.getCost(), this.getCost());
+        	}
+
+        	return titleComparison;
+    		}
+	}
+- Ở trường hợp này thì đầu tiên so sánh title
+- Nếu title bằng nhau thì so sánh cost ( theo thứ tự giảm dần )
+
+3) Không, phương thức compareTo trong Comparable đảm bảo một thứ tự trên các đối tượng => chỉ được chọn một quy tắc sắp xếp. Nếu muốn cả hai quy tắc => sử dụng Comparator, vì nó cho phép linh hoạt hơn trong việc muốn có nhiều kiểu so sánh.
+
+4) Sắp xếp DVD theo title -> length (giảm dần) -> cost (giảm dần)
+public class DigitalVideoDisc extends Media {
+    	// ... các thành phần khác của lớp
+
+    	@Override
+    	public int compareTo(Media other) {
+        	if (other instanceof DigitalVideoDisc) {
+            		DigitalVideoDisc otherDVD = (DigitalVideoDisc) other;
+            		// So sánh theo tiêu đề trước
+            		int titleComparison = this.getTitle().compareTo(other.getTitle());
+
+            		// Nếu tiêu đề giống nhau, so sánh theo chiều dài giảm dần
+            		if (titleComparison == 0) {
+                		int lengthComparison = Integer.compare(otherDVD.getLength(), this.getLength());
+                		if (lengthComparison == 0) {
+                    			// Nếu chiều dài giống nhau, so sánh theo giá giảm dần
+                    			return Float.compare(other.getCost(), this.getCost());
+                		}	
+                	return lengthComparison;
+            		}
+
+            	return titleComparison;
+        	} else {
+            		// Nếu ko phải DVD => báo
+			System.out.println("Không phải DVD");
+        	}
+    	}
+}

@@ -1,0 +1,8 @@
+- Question: Is JAVA a Pass by Value or a Pass by Reference programming language?
+	-->Ans: Java được coi là pass-by-value. Khi truyền một kiểu dữ liệu nguyên thủy vào một phương thức thì đang truyền giá trị thực sự. Khi truyền một đối tượng vào một phương thức thì truyền giá trị của tham chiếu đến đối tượng, chứ không phải đối tượng thực sự. Do đó, những thay đổi vào trạng thái của đối tượng sẽ ảnh hưởng đến đối tượng gốc, nhưng việc gán lại tham chiếu trong phương thức sẽ không ảnh hưởng đến tham chiếu gốc ở ngoài phương thức.
+
+- After the call of swap(jungleDVD, cinderellaDVD) why does the title of these two objects still remain?
+	-->Ans: Bởi vì khi phương thức swap được gọi sẽ tạo ra bản copy của phương thức được truyền vào (jungleDVD, cinderellaDVD) là object o1 và o2. Và nó không làm thay đổi jungleDVD và cinderellaDVD mà chỉ làm thay đổi tham chiếu của o1 và o2 
+
+- After the call of changeTitle(jungleDVD, cinderellaDVD.getTitle()) why is the title of the JungleDVD changed?
+	-->Ans: Bởi vì phương thức changeTitle tạo bản copy là dvd đã gọi phương thức setTitle và thay đổi title của jungleDVD nên sau khi phương thức changeTitle kết thúc, title của jungleDVD cũng được cập nhật.

@@ -1,0 +1,9 @@
+Q1:
+- Java là ngôn ngữ lập trình Pass by Value
+- Sau khi thực hiện hàm swap hai tiêu đề vẫn giữ nguyên vì:
+	+ Đây là kiểu truyền giá trị
+	+ Một bản sao của giá trị được tạo ra trong hàm, và bất kỳ thay đổi nào được thực hiện trong hàm không ảnh hưởng đến giá trị gốc.
+- Sau khi thực hiện hàm change tiêu đề của Jungle chuyển thành Cinderella vì:
+	+ Đây là kiểu truyền theo tham chiếu
+	+ Bất kỳ thay đổi nào được thực hiện trên tham chiếu sẽ ảnh hưởng trực tiếp đến giá trị của biến gốc.
+	+ Nó lấy trực tiếp tiêu đề của cinderella dvd set cho tiêu đề của jungle dvd 
